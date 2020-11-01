@@ -50,10 +50,6 @@ std::size_t BayesianClassifier::ClassOf(const std::string& newSample) const
 	std::pair<double, std::size_t> maxEstimation(-std::numeric_limits<double>::infinity(), 0);
 	for (std::size_t classID = 0; classID < ClassesCount(); ++classID)
 	{
-		const auto countDocumentsOfClass = static_cast<double>(SamplesOfClassCount(classID));
-		std::cout << '[' << classes_.at(classID) << "]\n";
-		std::cout << "log10(" << countDocumentsOfClass << " / " << samples_.size() << ")\n";
-
 		const double estimation = CalculateEstimation(classID, newSampleWords);
 		std::cout << "= " << estimation << '\n' << std::endl;
 
@@ -90,7 +86,7 @@ double BayesianClassifier::CalculateEstimation(std::size_t classID, const std::s
 	{
 		const auto countOccurrencesOfWord = value_or_default(countsWordsInClass, word, 0);
 
-		std::cout << "log10((" << ALPHA << " + " << countOccurrencesOfWord << ") / (" << totalWordsCount_ << " + " << countsWordsInClass.size() << "))\n";
+		std::cout << "log10((" << ALPHA << " + " << countOccurrencesOfWord << ") / (" << totalWordsCount_ << " + " << countsWordsInClass.size() << ")) '" << word << "'\n";
 		estimation += std::log10((ALPHA + countOccurrencesOfWord) / static_cast<double>(totalWordsCount_ + countsWordsInClass.size()));
 	}
 
