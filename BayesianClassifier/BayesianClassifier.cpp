@@ -8,7 +8,7 @@
 
 
 BayesianClassifier::BayesianClassifier(std::vector<std::string> classes)
-    : trained_(false)
+	: trained_(false)
 	, totalWordsCount_(0)
 	, countWordsForClass_()
 	, classes_(std::move(classes))
